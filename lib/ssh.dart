@@ -33,7 +33,7 @@ class SSHClient {
     @required this.port,
     @required this.username,
     @required
-        this.passwordOrKey, // password or {privateKey: value, [publicKey: value, passphrase: value]}
+    this.passwordOrKey, // password or {privateKey: value, [publicKey: value, passphrase: value]}
   }) {
     var uuid = new Uuid();
     id = uuid.v4();
@@ -196,20 +196,20 @@ class SSHClient {
     });
   }
 
-  Future disconnectSFTP() async {
+  void disconnectSFTP() {
     uploadCallback = null;
     downloadCallback = null;
-    await _channel.invokeMethod('disconnectSFTP', {
+    _channel.invokeMethod('disconnectSFTP', {
       "id": id,
     });
   }
 
-  Future disconnect() async {
+  void disconnect() {
     shellCallback = null;
     uploadCallback = null;
     downloadCallback = null;
     stateSubscription.cancel();
-    await _channel.invokeMethod('disconnect', {
+    _channel.invokeMethod('disconnect', {
       "id": id,
     });
   }

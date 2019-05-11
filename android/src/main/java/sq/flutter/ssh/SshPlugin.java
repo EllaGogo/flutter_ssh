@@ -151,6 +151,7 @@ public class SshPlugin implements MethodCallHandler, StreamHandler {
             session.setPassword(password);
 
           Properties properties = new Properties();
+          session.setConfig("PreferredAuthentications", "password");
           properties.setProperty("StrictHostKeyChecking", "no");
           session.setConfig(properties);
           session.connect();
